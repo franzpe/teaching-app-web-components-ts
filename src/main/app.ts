@@ -1,11 +1,33 @@
-import { LitElement, css, html, customElement, property } from 'lit-element';
+import { LitElement, css, html, customElement } from 'lit-element';
 
-@customElement('app-el')
+import './header.ts';
+import './footer.ts';
+import '../dashboard';
+
+@customElement('app-entry')
 export class App extends LitElement {
+  static get styles() {
+    return css`
+      .app {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .main-wrapper {
+        flex: 1;
+      }
+    `;
+  }
+
   render() {
     return html`
       <div class="app">
-        <hello-world title="Hello World!" description="This is my super awesome web component"></hello-world>
+        <header-el></header-el>
+        <div class="main-wrapper">
+          <dashboard-el></dashboard-el>
+        </div>
+        <footer-el></footer-el>
       </div>
     `;
   }

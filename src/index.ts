@@ -1,2 +1,2 @@
-import './components/hello-world-elem';
 import './main/app';
+import './index.css';
