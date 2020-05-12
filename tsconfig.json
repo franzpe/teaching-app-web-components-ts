@@ -8,6 +8,7 @@
     "target": "es6",
     "moduleResolution": "node",
     "jsx": "react",
-    "allowJs": true
+    "allowJs": true,
+    "noImplicitAny": false
   }
 }

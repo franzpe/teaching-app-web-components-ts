@@ -1,8 +1,13 @@
-import { LitElement, property, css, html, customElement } from 'lit-element';
+import { css, html, customElement } from 'lit-element';
+
+import Component from '../_components/Component';
+import store from '../_store';
 
 @customElement('dashboard-el')
-export class DashboardEl extends LitElement {
-  @property({ type: String }) words: string = '';
+export class DashboardEl extends Component {
+  constructor() {
+    super({ store });
+  }
 
   static get properties() {
     return {
@@ -23,7 +28,7 @@ export class DashboardEl extends LitElement {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    this.words = formData.get('words') as string;
+    store.dispatch('addWord', formData.get('words'));
   }
 
   render() {
@@ -33,9 +38,8 @@ export class DashboardEl extends LitElement {
           <input id="words" name="words"></input>
           <button type="submit">ok</button>
         </form>
-        <div>${this.words}</div>
         <ul>
-          ${this.words.split(',').map(word => (word !== '' ? html`<li>${word}</li>` : ``))}
+          ${store.state.words.map(word => (word !== '' ? html`<li>${word}</li>` : ``))}
         </ul>
       </main>
     `;
