@@ -10,12 +10,14 @@ export class App extends LitElement {
     return css`
       .app {
         height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: column;
       }
 
       .main-wrapper {
         flex: 1;
+        padding: 8px;
       }
     `;
   }

@@ -1,5 +1,6 @@
 import Store from '../_store/store';
 import { LitElement } from 'lit-element';
+
 import { ApplicationState } from '../_store/state';
 
 interface Props {
@@ -19,6 +20,9 @@ class Component<T> extends LitElement {
 
     props.store.events.subscribe('stateChange', (_, keyChanged) => {
       if (Object.keys(this.props).indexOf(keyChanged) > -1) {
+        // Get fresh slice of the state
+        this.props = props.mapState ? props.mapState(props.store.state) : {};
+        // Force rerenderk
         super.update(new Map());
       }
     });
