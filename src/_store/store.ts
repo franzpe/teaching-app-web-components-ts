@@ -1,5 +1,5 @@
 import PubSub from '../_libs/pubSub';
-import { ApplicationState } from './state';
+import state, { ApplicationState } from './state';
 
 type Params = {
   actions?: Object;
@@ -17,7 +17,7 @@ export default class Store {
   constructor(params: Params) {
     this.actions = {};
     this.mutations = {};
-    this.state = params.state || { words: [] };
+    this.state = params.state || state;
     this.status = 'resting';
     this.events = new PubSub();
 
@@ -31,11 +31,13 @@ export default class Store {
 
     this.state = new Proxy<ApplicationState>(this.state, {
       set: (state, key: string, value) => {
+        if (state[key] === value) return true;
+
         state[key] = value;
 
         console.log(`stateChange: ${key}: ${value}`);
 
-        this.events.publish('stateChange', this.state);
+        this.events.publish('stateChange', this.state, key);
 
         if (this.status !== 'mutation') {
           console.warn(`You should use a mutation to set ${key}`);

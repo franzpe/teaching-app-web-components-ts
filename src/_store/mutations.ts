@@ -1,13 +1,24 @@
-const addItem = (state, payload) => {
-  state.words.push(payload);
+import { ApplicationState } from './state';
 
-  return state;
+const addWord = (state: ApplicationState, payload) => {
+  const words = state.words.slice();
+  words.push(payload);
+
+  return { ...state, words };
 };
 
-const clearItem = (state, payload) => {
-  state.words.splice(payload.index, 1);
+const clearWord = (state: ApplicationState, payload) => {
+  const words = state.words.slice();
+  words.splice(payload.index, 1);
 
-  return state;
+  return { ...state, words };
 };
 
-export default { addItem, clearItem };
+const addHistory = (state: ApplicationState, payload: Array<string>) => {
+  const history = state.history.slice();
+  history.push(payload);
+
+  return { ...state, history };
+};
+
+export default { addWord, clearWord, addHistory };
