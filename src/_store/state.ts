@@ -1,5 +1,10 @@
+export interface Word {
+  isCompleted: boolean;
+  text: string;
+}
+
 export interface ApplicationState {
-  words: Array<string>;
+  words: Array<Word>;
   history: Array<Array<string>>;
 }
 

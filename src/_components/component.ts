@@ -28,7 +28,7 @@ class Component<T> extends LitElement {
     });
   }
 
-  dispatch = (actionKey: string, payload: any) => this._store.dispatch(actionKey, payload);
+  dispatch = (actionKey: string, payload: any = null) => this._store.dispatch(actionKey, payload);
 }
 
 export default Component;
