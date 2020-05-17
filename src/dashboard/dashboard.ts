@@ -15,6 +15,7 @@ interface Props {
 export class DashboardEl extends Component<Props> {
   constructor() {
     super({ store, mapState: state => ({ words: state.words }) });
+    this.dispatch('setupListeners');
   }
 
   static get properties() {
@@ -39,7 +40,7 @@ export class DashboardEl extends Component<Props> {
 
     if (wordsString) {
       const words = wordsString.split(',').filter(w => w !== '');
-      this.dispatch('addWords', { texts: words });
+      this.dispatch('postWords', { texts: words });
       wordsInput.value = '';
     }
   };

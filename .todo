@@ -1,5 +1,8 @@
 BACKEND:
-☐ setup firebase
-☐ save words
+✔ setup firebase @done(20-05-17 17:19)
+✔ save words @done(20-05-17 17:19)
+	✔ toggle completion @done(20-05-17 17:19)
+	✔ remove word @done(20-05-17 17:19)
 	☐ by days
 ☐ word definitions
+☐ notes

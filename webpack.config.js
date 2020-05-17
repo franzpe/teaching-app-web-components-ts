@@ -1,7 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
 
 module.exports = (env, argv) => ({
   mode: 'development',
@@ -34,7 +36,8 @@ module.exports = (env, argv) => ({
         to: './',
         flatten: true
       }
-    ])
+    ]),
+    new webpack.DefinePlugin({ 'process.env': JSON.stringify(dotenv.parsed) })
   ],
   output: {
     filename: '[name].bundle.js',

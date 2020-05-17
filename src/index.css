@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -6,9 +10,71 @@ body {
 }
 
 body {
+  font: 16px 'Helvetica Neue', Helvetica, Arial;
+  font-weight: 300;
+  line-height: 1.5;
+  width: auto;
   background-color: #efefef;
+  color: #353535;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 
-* {
-  font-family: sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+}
+
+h2 {
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+a,
+.link {
+  color: #9f3c3c;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+a:hover,
+.link:hover {
+  color: #431919;
+  text-decoration: underline;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+var {
+  font-style: normal;
+}
+
+header p {
+  font-size: 30px;
+  line-height: 1.2;
+  margin-top: 10px;
+}
+
+header nav {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+header nav a {
+  font-weight: 200;
+}
+
+header nav a:not(:last-child) {
+  margin-right: 5px;
+  margin-bottom: 5px;
 }

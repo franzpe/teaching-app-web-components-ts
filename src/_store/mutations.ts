@@ -1,34 +1,33 @@
-import { ApplicationState } from './state';
+import { ApplicationState, Word } from './state';
 
-const addWords = (state: ApplicationState, payload: { texts: string[] }) => {
+const addWord = (state: ApplicationState, payload: { word: Word }) => {
   const words = state.words.slice();
 
-  payload.texts.forEach(t => words.push({ isCompleted: false, text: t, definition: '' }));
+  words.push(payload.word);
+
+  return { ...state, words: words };
+};
+
+const updateWord = (state: ApplicationState, payload: { word: Word }) => {
+  const words = state.words.slice();
+
+  const index = words.findIndex(w => w.text === payload.word.text);
+
+  if (index > -1) {
+    words[index] = payload.word;
+  }
 
   return { ...state, words };
 };
 
-const toggleWordComplete = (state: ApplicationState, paylaod: { index: number }) => {
+const removeWord = (state: ApplicationState, payload: { word: Word }) => {
   const words = state.words.slice();
 
-  words[paylaod.index] = { ...words[paylaod.index], isCompleted: !words[paylaod.index].isCompleted };
+  const index = words.findIndex(w => w.text === payload.word.text);
 
-  return { ...state, words };
-};
-
-const toggleWordCompleteAll = (state: ApplicationState) => {
-  const words = state.words.slice();
-
-  const toggleTo = words.findIndex(w => !w.isCompleted) > -1;
-
-  words.forEach(w => (w.isCompleted = toggleTo));
-
-  return { ...state, words };
-};
-
-const removeWord = (state: ApplicationState, payload: { index: number }) => {
-  const words = state.words.slice();
-  words.splice(payload.index, 1);
+  if (index > -1) {
+    words.splice(index, 1);
+  }
 
   return { ...state, words };
 };
@@ -40,4 +39,4 @@ const archiveWords = (state: ApplicationState) => {
   return { ...state, history };
 };
 
-export default { addWords, removeWord, archiveWords, toggleWordComplete, toggleWordCompleteAll };
+export default { addWord, updateWord, removeWord, archiveWords };
