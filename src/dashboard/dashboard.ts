@@ -66,12 +66,16 @@ export class DashboardEl extends Component<Props> {
     this.dispatch('removeWord', { index });
   };
 
+  handleArchive = e => {
+    // TODO archive
+  };
+
   render() {
     const footer =
       this.props.words.length > 0
         ? html`<div class="footer"><span>${
             this.props.words.filter(w => !w.isCompleted).length
-          } words left</span></div`
+          } words left</span><button @click=${this.handleArchive}>Archive</button></div`
         : ``;
 
     return html`
@@ -101,13 +105,19 @@ export class DashboardEl extends Component<Props> {
                         @change=${this.handleToggleCompletion(i)}
                       />
                       <label>${word.text}</label>
-                      <button class="remove-word" @click=${this.handleRemove(i)}>×</button>
+                      <button class="action remove-word" @click=${this.handleRemove(i)}>×</button>
+                    </div>
+                    <div class="definition-wrapper">
+                      <input class="definition" placeholder="Type definition here" />
                     </div>
                   </li>
                 `
             )}
           </ul>
           ${footer}
+        </div>
+        <div style="margin-top: 3rem;">
+          archive
         </div>
       </main>
     `;

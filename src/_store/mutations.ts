@@ -3,7 +3,7 @@ import { ApplicationState } from './state';
 const addWords = (state: ApplicationState, payload: { texts: string[] }) => {
   const words = state.words.slice();
 
-  payload.texts.forEach(t => words.push({ isCompleted: false, text: t }));
+  payload.texts.forEach(t => words.push({ isCompleted: false, text: t, definition: '' }));
 
   return { ...state, words };
 };
@@ -33,11 +33,11 @@ const removeWord = (state: ApplicationState, payload: { index: number }) => {
   return { ...state, words };
 };
 
-const addHistory = (state: ApplicationState, payload: Array<string>) => {
+const archiveWords = (state: ApplicationState) => {
   const history = state.history.slice();
-  history.push(payload);
+  history.push(state.words);
 
   return { ...state, history };
 };
 
-export default { addWords, removeWord, addHistory, toggleWordComplete, toggleWordCompleteAll };
+export default { addWords, removeWord, archiveWords, toggleWordComplete, toggleWordCompleteAll };

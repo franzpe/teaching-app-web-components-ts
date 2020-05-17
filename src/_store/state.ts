@@ -1,11 +1,12 @@
 export interface Word {
   isCompleted: boolean;
   text: string;
+  definition: string;
 }
 
 export interface ApplicationState {
   words: Array<Word>;
-  history: Array<Array<string>>;
+  history: Array<Array<Word>>;
 }
 
 const state: ApplicationState = {

@@ -14,8 +14,8 @@ const removeWord = (context, payload: { index: number }) => {
   context.commit('removeWord', payload);
 };
 
-const addHistory = (context, payload) => {
-  context.commit('addHistory', payload);
+const archiveWords = (context, payload) => {
+  context.commit('archiveWords', payload);
 };
 
-export default { addWords, removeWord, addHistory, toggleWordComplete, toggleWordCompleteAll };
+export default { addWords, removeWord, archiveWords, toggleWordComplete, toggleWordCompleteAll };

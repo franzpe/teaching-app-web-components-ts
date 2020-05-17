@@ -2,8 +2,10 @@ import { css } from 'lit-element';
 
 export default css`
   .container {
+    height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .card {
@@ -42,6 +44,7 @@ export default css`
 
   .toggle-all + label:before {
     content: '❯';
+    cursor: pointer;
     font-size: 22px;
     color: #e6e6e6;
     padding: 10px 27px 10px 27px;
@@ -70,18 +73,22 @@ export default css`
     padding: 16px 16px 16px 60px;
     border: none;
     background: rgba(0, 0, 0, 0.003);
-    box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+    box-shadow: inset 0 -2px 2px rgba(0, 0, 0, 0.06);
   }
 
   .footer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: #777;
     padding: 10px 15px;
     height: 20px;
     text-align: center;
     border-top: 1px solid #e6e6e6;
+  }
+
+  .footer * {
+    z-index: 1;
   }
 
   .footer::before {
@@ -96,6 +103,10 @@ export default css`
       0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
   }
 
+  .footer button:hover {
+    text-decoration: underline;
+  }
+
   .words-list {
     margin: 0;
     padding: 0;
@@ -108,9 +119,34 @@ export default css`
     border-bottom: 1px solid #ededed;
   }
 
+  .words-list li div:first-child {
+    position: relative;
+  }
+
+  .words-list li .definition-wrapper {
+    line-height: 0;
+  }
+
+  .words-list li .definition {
+    padding: 0 16px 8px 60px;
+    border: none;
+    position: relative;
+    width: 100%;
+    font-size: 12px;
+    font-style: italic;
+    font-family: inherit;
+    font-weight: inherit;
+    color: inherit;
+    box-sizing: border-box;
+  }
+
+  .words-list li:last-child {
+    border-bottom: none;
+  }
+
   .words-list li label {
     word-break: break-all;
-    padding: 15px 15px 15px 60px;
+    padding: 8px 15px 8px 60px;
     display: block;
     line-height: 1.2;
     transition: color 0.45s, background 0.1s;
@@ -146,7 +182,12 @@ export default css`
     text-decoration: line-through;
   }
 
+  .words-list li:hover .action {
+    visibility: visible;
+  }
+
   button {
+    cursor: pointer;
     margin: 0;
     padding: 0;
     border: 0;
@@ -162,22 +203,25 @@ export default css`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .action {
+    visibility: hidden;
+  }
+
+  .action:hover {
+    font-weight: 400;
+  }
+
   .remove-word {
     position: absolute;
     top: 0;
     right: 10px;
     bottom: 0;
     width: 40px;
-    height: 40px;
+    height: 35px;
     margin: auto 0;
     font-size: 30px;
     color: #cc9a9a;
-    margin-bottom: 11px;
-    transition: color 0.2s ease-out;
-  }
-
-  .remove-word:hover {
-    color: #af5b5e;
+    margin-bottom: 8px;
   }
 
   ::-webkit-input-placeholder {
@@ -195,6 +239,10 @@ export default css`
   ::placeholder {
     color: #dfdfdf;
     font-style: italic;
+  }
+
+  input[type='checkbox'] {
+    cursor: pointer;
   }
 
   input:focus,

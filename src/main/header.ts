@@ -19,6 +19,10 @@ export class HeaderEl extends LitElement {
       .logo {
         font-size: 2rem;
       }
+      strong {
+        font-weight: 400;
+        color: #5f5f5f;
+      }
     `;
   }
 
@@ -26,7 +30,7 @@ export class HeaderEl extends LitElement {
     return html`
       <header>
         <div class="container">
-          <div class="logo">Teaching app</div>
+          <div class="logo">Je m'appelle Claude</div>
         </div>
       </header>
     `;
