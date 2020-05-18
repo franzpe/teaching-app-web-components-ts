@@ -2,15 +2,15 @@ import WordService from '../_services/wordService';
 import { Word } from './state';
 import Store from './store';
 
-const addWord = (context, payload: { word: Word }) => {
+const onAddWord = (context, payload: { word: Word }) => {
   context.commit('addWord', payload);
 };
 
-const updateWord = (context, payload: { word: Word }) => {
+const onUpdateWord = (context, payload: { word: Word }) => {
   context.commit('updateWord', payload);
 };
 
-const removeWord = (context, payload: { word: Word }) => {
+const onRemoveWord = (context, payload: { text: string }) => {
   context.commit('removeWord', payload);
 };
 
@@ -23,9 +23,9 @@ const archiveWords = (context, payload) => {
  */
 const setupListeners = context => {
   const service = new WordService();
-  service.onWordAdded(word => context.dispatch('addWord', { word }));
-  service.onWordChanged(word => context.dispatch('updateWord', { word }));
-  service.onWordRemoved(word => context.dispatch('removeWord', { word }));
+  service.onWordAdded(word => context.dispatch('onAddWord', { word }));
+  service.onWordChanged(word => context.dispatch('onUpdateWord', { word }));
+  service.onWordRemoved(text => context.dispatch('onRemoveWord', { text }));
 };
 
 const postWords = async (context: Store, payload: { texts: string[] }) => {
@@ -53,11 +53,18 @@ const toggleWordCompleteAll = (context: Store) => {
   service.updateWords(words);
 };
 
+const removeWord = (context: Store, payload: { index: number }) => {
+  const service = new WordService();
+  const word = context.state.words.find((_, i) => i === payload.index);
+  service.removeWord(word!.text);
+};
+
 export default {
   postWords,
   setupListeners,
-  addWord,
-  updateWord,
+  onAddWord,
+  onUpdateWord,
+  onRemoveWord,
   removeWord,
   archiveWords,
   toggleWordComplete,

@@ -52,6 +52,10 @@ class WordService {
 
     return this._wordsRef.update(updates);
   }
+
+  async removeWord(text: string) {
+    return this._wordsRef.child('/' + text).remove();
+  }
 }
 
 export default WordService;

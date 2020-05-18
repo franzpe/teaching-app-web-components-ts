@@ -20,10 +20,10 @@ const updateWord = (state: ApplicationState, payload: { word: Word }) => {
   return { ...state, words };
 };
 
-const removeWord = (state: ApplicationState, payload: { word: Word }) => {
+const removeWord = (state: ApplicationState, payload: { text: string }) => {
   const words = state.words.slice();
 
-  const index = words.findIndex(w => w.text === payload.word.text);
+  const index = words.findIndex(w => w.text === payload.text);
 
   if (index > -1) {
     words.splice(index, 1);
